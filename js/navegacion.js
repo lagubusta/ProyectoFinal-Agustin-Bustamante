@@ -3,34 +3,32 @@
 const cuerpo = document.body;
 cuerpo.style.backgroundColor = '#23003a';
 //cabecera
-const cabecera = document.createElement('cabecera');
+const cabecera = document.createElement('header');
 cabecera.id = ('cabecera');
 cuerpo.appendChild(cabecera);
+// Div navegador
+const navegador = document.createElement('div');
+navegador.id = ('IdNav');
+cabecera.appendChild(navegador);
+// nav
+const nav = document.createElement('nav');
+nav.id = ('idNav');
+navegador.appendChild(nav);
+// Ul nav
+const ulNav = document.createElement ('ul');
+ulNav.id=('idUl');
+navegador.appendChild(ulNav);
+// array de links
+const links = ["Index", "Productos", "Contacto"];
+for( link of links) {
+    const liNav = document.createElement ('li');
+    liNav.id = ('idLiNav');
+    liNav.innerHTML = `<a href="./pages/${link.toLowerCase()}.html">${link}</a>`;
+    ulNav.appendChild(liNav);
+}
 
-//// //// //// nav bar
-const navBar = document.createElement('nav');
-navBar.className = ('NavBarClase')
-
-cabecera.appendChild(navBar);
-
-//// //// //// lista de items navbar
-const ulNavBar = document.createElement('ul');
-navBar.style.display = 'flex';
+// colores definidos.
+const colorAmarillo = '#d6a505';
 
 
-navBar.appendChild(ulNavBar);
-//// Nombre Navbar
-const listaNavBar = ['Inicio', 'Prodcutos', 'Contacto'];
-for (const item of listaNavBar) {
-    const lista = document.createElement('li');
-    lista.innerHTML = `<a href="${listaNavBar.toLowerCase()}.html" >${item}</a>`;
-    ulNavBar.appendChild(lista);
-
-
-    item.textContent = listaNavBar[i];
-    item.className = 'claseItemNav'
-}  
-
-
-// const origen = document.createElement('a');
 
