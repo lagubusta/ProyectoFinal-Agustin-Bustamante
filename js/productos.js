@@ -2,13 +2,10 @@
 const divListaProductos = document.createElement('div');
 divListaProductos.id = ('product-list');
 cuerpo.appendChild(divListaProductos);
-// divListaProductos.style.backgroundColor = 'green';
-divListaProductos.style.border = 'solid, 2px, green';
+divListaProductos.style.border = 'solid 2px green';
 divListaProductos.style.padding = '1rem'
 divListaProductos.style.display = 'flex';
-
-
-
+divListaProductos.style.flexWrap = 'wrap';
 
 const divCarrito = document.createElement('div');
 divCarrito.id = ('cart');
@@ -16,14 +13,8 @@ cuerpo.appendChild(divCarrito);
 divCarrito.style.fontFamily = 'buda';
 divCarrito.style.color = colorAmarillo;
 divCarrito.style.fontSize = '18px';
+divCarrito.style.padding = '6rem';
 
-// const itemIndi = document.getElementById ('ITEM-INDI');
-// itemIndi.style.backgroundColor = 'blue';
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
 const products = [  //2.
     { id: 1, nombre: "Azucar", precio: 1080, },
     { id: 2, nombre: "Yerba", precio: 1700, },
@@ -33,6 +24,7 @@ const products = [  //2.
     { id: 6, nombre: "Café", precio: 6000, },
 ];
 let cart = loadCartFromLocalStorage();  //3.
+
 function addToCart(productId, cantidad) { //4.
     const product = products.find(p => p.id === productId);  //4.1.
     if (!product) { //4.2.
@@ -58,20 +50,9 @@ function addToCart(productId, cantidad) { //4.
 function calculateTotal() { //5.
     return cart.reduce((total, item) => total + item.subTotal, 0);
 }
-
-
-
-
-
-
-
 function renderProducts() { //6.
     const productList = document.getElementById('product-list'); //6.1
     productList.innerHTML = ''; //6.2
-
-////////////////////Diseño
-
-    // productList.style.backgroundColor = 'yellow';
     productList.style.display = 'flex';
     productList.style.textAlign = 'center';
     productList.style.justifyContent = 'center'
@@ -81,46 +62,40 @@ function renderProducts() { //6.
     products.forEach(product => { //6.3
         const productDiv = document.createElement('div'); //6.4
         productDiv.innerHTML = `
-        <div id="deItem">
         <p>${product.nombre} - $${product.precio}</p>
         <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
-        </div>
         `;
         productList.appendChild(productDiv); //6.5
-
-////////////////////Diseño
-        productDiv.style.backgroundColor = 'red';
-        productDiv.style.margin = '1rem'
+        productDiv.style.backgroundColor = 'white';
+        productDiv.style.padding = '1rem';
         productDiv.style.textAlign = 'center';
-        productDiv.style.height = '16px';
-
+        productDiv.style.minHeight = '12rem';
+        productDiv.style.maxHeight = '16rem';
+        // productDiv.style.flexBasis = 'calc(25% - 1rem)';
+        productDiv.style.flexBasis = 'calc(33.33% - 2rem)';
+        productDiv.style.margin = '1rem';
+        productDiv.style.boxSizing = 'border-box';
     });
 }
 
-
-
-
-
-
-
-
 function renderCart() { //7.
     const cartDiv = document.getElementById('cart'); //7.1
-////////////////////Diseño
     cartDiv.style.backgroundColor = 'pink';
     cartDiv.style.padding = '1rem';
-
     cartDiv.innerHTML = ''; //7.2
     cart.forEach(item => { //7.3
         const cartItemDiv = document.createElement('div');
         cartItemDiv.innerHTML = `
-        <p>ID: ${item.id}, Nombre: ${item.nombre}, Cantidad: ${item.cantidad}, Precio total $${item.subTotal}</p>
+        <p>${item.nombre}: ${item.precio} x ${item.cantidad} = $${item.subTotal}</p>
         `;
+        cartItemDiv.style.backgroundColor = 'blue';
+        cartItemDiv.style.padding = '1rem';
         cartDiv.appendChild(cartItemDiv); //7.4
     });
     const totalDiv = document.createElement('div'); //8.
     totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`; //8.1
     cartDiv.appendChild(totalDiv); //8.2
+    totalDiv.style.alignItems = 'right';
 }
 function saveCartToLocalStorage() {   //9.
     localStorage.setItem('cart', JSON.stringify(cart)); //9.1
@@ -131,7 +106,5 @@ function loadCartFromLocalStorage() {   // 9.2
 }
 document.addEventListener('DOMContentLoaded', () => {    //10.
     renderProducts();
-    renderCarrenderCart();
+    renderCart();
 });
-
-////////////////////Diseño
