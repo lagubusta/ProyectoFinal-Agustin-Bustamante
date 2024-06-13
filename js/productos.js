@@ -95,7 +95,9 @@ function renderCart() { //7.
     });
     const totalDiv = document.createElement('div'); //8.
     const finalizarCompra = document.createElement('button');
-    finalizarCompra.textContent = 'Finalizar Compra',
+    const vaciarCarro = document.createElement('button');
+
+    finalizarCompra.textContent = 'Finalizar Compra';
     
     totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`; //8.1
     cartDiv.appendChild(totalDiv); //8.2
@@ -106,6 +108,12 @@ function renderCart() { //7.
     totalDiv.style.padding = '1.5rem';
     totalDiv.style.fontFamily = 'Impact';
     totalDiv.style.textAlign = 'center';
+
+    totalDiv.appendChild(vaciarCarro);
+    vaciarCarro.textContent = 'Vaciar';
+    vaciarCarro.style.margin = '1.5rem';
+    
+
 
 }
 function saveCartToLocalStorage() {   //9.
@@ -122,5 +130,3 @@ document.addEventListener('DOMContentLoaded', () => {    //10.
 
 
 
-const estiloBoton = document.querySelectorAll(button);
-estiloBoton.style.backgroundColor = 'red';
