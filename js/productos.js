@@ -2,7 +2,6 @@
 const divListaProductos = document.createElement('div');
 divListaProductos.id = ('product-list');
 cuerpo.appendChild(divListaProductos);
-divListaProductos.style.border = 'solid 2px green';
 divListaProductos.style.padding = '1rem'
 divListaProductos.style.display = 'flex';
 divListaProductos.style.flexWrap = 'wrap';
@@ -62,7 +61,7 @@ function renderProducts() { //6.
     products.forEach(product => { //6.3
         const productDiv = document.createElement('div'); //6.4
         productDiv.innerHTML = `
-        <p>${product.nombre} - $${product.precio}</p>
+        <p>${product.nombre} - $${product.precio}</p> <br><hr><br>
         <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
         `;
         productList.appendChild(productDiv); //6.5
@@ -71,7 +70,6 @@ function renderProducts() { //6.
         productDiv.style.textAlign = 'center';
         productDiv.style.minHeight = '12rem';
         productDiv.style.maxHeight = '16rem';
-        // productDiv.style.flexBasis = 'calc(25% - 1rem)';
         productDiv.style.flexBasis = 'calc(33.33% - 2rem)';
         productDiv.style.margin = '1rem';
         productDiv.style.boxSizing = 'border-box';
@@ -80,22 +78,35 @@ function renderProducts() { //6.
 
 function renderCart() { //7.
     const cartDiv = document.getElementById('cart'); //7.1
-    cartDiv.style.backgroundColor = 'pink';
+    cartDiv.style.backgroundColor = '#4c1e69';
     cartDiv.style.padding = '1rem';
+    cartDiv.style.display = 'flex';
+    cartDiv.style.flexDirection = 'column';
+    // cartDiv.style.alignItems = 'flex-start';
     cartDiv.innerHTML = ''; //7.2
     cart.forEach(item => { //7.3
         const cartItemDiv = document.createElement('div');
         cartItemDiv.innerHTML = `
         <p>${item.nombre}: ${item.precio} x ${item.cantidad} = $${item.subTotal}</p>
         `;
-        cartItemDiv.style.backgroundColor = 'blue';
+        cartItemDiv.style.backgroundColor = '#150320';
         cartItemDiv.style.padding = '1rem';
         cartDiv.appendChild(cartItemDiv); //7.4
     });
     const totalDiv = document.createElement('div'); //8.
+    const finalizarCompra = document.createElement('button');
+    finalizarCompra.textContent = 'Finalizar Compra',
+    
     totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`; //8.1
     cartDiv.appendChild(totalDiv); //8.2
-    totalDiv.style.alignItems = 'right';
+    totalDiv.appendChild(finalizarCompra);
+    totalDiv.style.alignSelf = 'flex-end'
+    totalDiv.style.color = 'colorAmarillo';
+    totalDiv.style.fontSize = '2rem';
+    totalDiv.style.padding = '1.5rem';
+    totalDiv.style.fontFamily = 'Impact';
+    totalDiv.style.textAlign = 'center';
+
 }
 function saveCartToLocalStorage() {   //9.
     localStorage.setItem('cart', JSON.stringify(cart)); //9.1
@@ -108,3 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {    //10.
     renderProducts();
     renderCart();
 });
+
+
+
+const estiloBoton = document.querySelectorAll(button);
+estiloBoton.style.backgroundColor = 'red';

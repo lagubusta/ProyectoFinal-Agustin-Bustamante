@@ -27,8 +27,7 @@ for( link of links) {
     ulNav.appendChild(liNav);
 }
 
-// colores definidos.
-const colorAmarillo = '#d6a505';
+
 
 
 

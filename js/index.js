@@ -18,9 +18,25 @@ titular.style.fontSize = '6rem';
 // articulo 1
 const articulo1 = document.createElement('article');
 cuerpo.appendChild(articulo1);
-articulo1.style.backgroundColor = 'pink'
+articulo1.style.backgroundColor = 'colorAmarillo'
 articulo1.style.margin = '2rem';
 articulo1.style.width = '50%';
+
+
+articulo1.addEventListener('mouseover', () => {
+    articulo1.style.color = 'black';
+    articulo1.style.backgroundColor ='pink';
+});
+
+articulo1.addEventListener('mouseout', () => {
+    articulo1.style.color = 'white';
+    articulo1.style.backgroundColor ='grey';
+});
+
+
+
+
+
 
 const titularArticle1 = document.createElement('h2');
 articulo1.appendChild(titularArticle1);
