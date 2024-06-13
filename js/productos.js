@@ -2,10 +2,11 @@
 const divListaProductos = document.createElement('div');
 divListaProductos.id = ('product-list');
 cuerpo.appendChild(divListaProductos);
-divListaProductos.style.backgroundColor = 'green';
+// divListaProductos.style.backgroundColor = 'green';
 divListaProductos.style.border = 'solid, 2px, green';
 divListaProductos.style.padding = '1rem'
 divListaProductos.style.display = 'flex';
+
 
 
 
@@ -15,6 +16,9 @@ cuerpo.appendChild(divCarrito);
 divCarrito.style.fontFamily = 'buda';
 divCarrito.style.color = colorAmarillo;
 divCarrito.style.fontSize = '18px';
+
+// const itemIndi = document.getElementById ('ITEM-INDI');
+// itemIndi.style.backgroundColor = 'blue';
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -54,10 +58,19 @@ function addToCart(productId, cantidad) { //4.
 function calculateTotal() { //5.
     return cart.reduce((total, item) => total + item.subTotal, 0);
 }
+
+
+
+
+
+
+
 function renderProducts() { //6.
     const productList = document.getElementById('product-list'); //6.1
     productList.innerHTML = ''; //6.2
+
 ////////////////////Diseño
+
     // productList.style.backgroundColor = 'yellow';
     productList.style.display = 'flex';
     productList.style.textAlign = 'center';
@@ -68,8 +81,10 @@ function renderProducts() { //6.
     products.forEach(product => { //6.3
         const productDiv = document.createElement('div'); //6.4
         productDiv.innerHTML = `
+        <div id="deItem">
         <p>${product.nombre} - $${product.precio}</p>
         <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
+        </div>
         `;
         productList.appendChild(productDiv); //6.5
 
@@ -81,6 +96,12 @@ function renderProducts() { //6.
 
     });
 }
+
+
+
+
+
+
 
 
 function renderCart() { //7.
