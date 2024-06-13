@@ -2,16 +2,24 @@
 const divListaProductos = document.createElement('div');
 divListaProductos.id = ('product-list');
 cuerpo.appendChild(divListaProductos);
+divListaProductos.style.backgroundColor = 'green';
+divListaProductos.style.border = 'solid, 2px, green';
+divListaProductos.style.padding = '1rem'
+divListaProductos.style.display = 'flex';
+
+
 
 const divCarrito = document.createElement('div');
 divCarrito.id = ('cart');
 cuerpo.appendChild(divCarrito);
+divCarrito.style.fontFamily = 'buda';
+divCarrito.style.color = colorAmarillo;
+divCarrito.style.fontSize = '18px';
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
 const products = [  //2.
     { id: 1, nombre: "Azucar", precio: 1080, },
     { id: 2, nombre: "Yerba", precio: 1700, },
@@ -49,6 +57,14 @@ function calculateTotal() { //5.
 function renderProducts() { //6.
     const productList = document.getElementById('product-list'); //6.1
     productList.innerHTML = ''; //6.2
+////////////////////Diseño
+    // productList.style.backgroundColor = 'yellow';
+    productList.style.display = 'flex';
+    productList.style.textAlign = 'center';
+    productList.style.justifyContent = 'center'
+    productList.style.alignItems = 'center'
+    productList.style.verticalAlign = 'middle';
+
     products.forEach(product => { //6.3
         const productDiv = document.createElement('div'); //6.4
         productDiv.innerHTML = `
@@ -56,10 +72,23 @@ function renderProducts() { //6.
         <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
         `;
         productList.appendChild(productDiv); //6.5
+
+////////////////////Diseño
+        productDiv.style.backgroundColor = 'red';
+        productDiv.style.margin = '1rem'
+        productDiv.style.textAlign = 'center';
+        productDiv.style.height = '16px';
+
     });
 }
+
+
 function renderCart() { //7.
     const cartDiv = document.getElementById('cart'); //7.1
+////////////////////Diseño
+    cartDiv.style.backgroundColor = 'pink';
+    cartDiv.style.padding = '1rem';
+
     cartDiv.innerHTML = ''; //7.2
     cart.forEach(item => { //7.3
         const cartItemDiv = document.createElement('div');
@@ -83,3 +112,5 @@ document.addEventListener('DOMContentLoaded', () => {    //10.
     renderProducts();
     renderCarrenderCart();
 });
+
+////////////////////Diseño
