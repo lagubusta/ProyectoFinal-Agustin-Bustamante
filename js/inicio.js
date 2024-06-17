@@ -13,10 +13,16 @@ titular.style.paddingTop = '4rem';
 titular.style.color = colorAmarillo;
 titular.style.fontSize = '6rem';
 
-// articulo 1
-const articulo1 = document.createElement('article');
-cuerpo.appendChild(articulo1);
+//div articulos
+const divArticulos = document.createElement('div');
+cuerpo.appendChild(divArticulos);
 
+const articulo1 = document.createElement('article');
+divArticulos.appendChild(articulo1);
+divArticulos.style.display = 'flex';
+
+
+// articulo 1
 const titularArticle1 = document.createElement('h2');
 articulo1.appendChild(titularArticle1);
 titularArticle1.textContent = ('¿Quienes somos?');
@@ -39,7 +45,7 @@ articulo1.addEventListener('mouseout', () => {
 
 // articulo 2
 const articulo2 = document.createElement('article');
-cuerpo.appendChild(articulo2);
+divArticulos.appendChild(articulo2);
 articulo2.style.backgroundColor = colorAmarillo;
 articulo2.style.margin = '2rem';
 articulo2.style.width = '50%';
