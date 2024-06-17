@@ -1,4 +1,5 @@
 
+// Div contenedor de lista de productos
 const divListaProductos = document.createElement('div');
 divListaProductos.id = ('product-list');
 cuerpo.appendChild(divListaProductos);
@@ -6,6 +7,7 @@ divListaProductos.style.padding = '1rem'
 divListaProductos.style.display = 'flex';
 divListaProductos.style.flexWrap = 'wrap';
 
+// Div contenedor de carrito de compras
 const divCarrito = document.createElement('div');
 divCarrito.id = ('cart');
 cuerpo.appendChild(divCarrito);
@@ -14,6 +16,7 @@ divCarrito.style.color = colorAmarillo;
 divCarrito.style.fontSize = '18px';
 divCarrito.style.padding = '6rem';
 
+// Arry de productos.
 const products = [  //2.
     { id: 1, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
     { id: 2, nombre: "Dark Side of the Moon", precio: 25000, },
@@ -22,6 +25,7 @@ const products = [  //2.
     { id: 5, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
     { id: 6, nombre: "Buzo The Wall", precio: 15000, },
 ];
+// Local Storage con carrito
 let cart = loadCartFromLocalStorage();  //3.
 
 function addToCart(productId, cantidad) { //4.
@@ -42,6 +46,7 @@ function addToCart(productId, cantidad) { //4.
     saveCartToLocalStorage(); //4.7.
     renderCart(); //4.8.
 };
+// Calcular total
 function calculateTotal() { //5.
     return cart.reduce((total, item) => total + item.subTotal, 0);
 }

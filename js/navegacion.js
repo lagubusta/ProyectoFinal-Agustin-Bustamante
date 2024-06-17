@@ -19,11 +19,11 @@ const ulNav = document.createElement ('ul');
 ulNav.id=('idUl');
 navegador.appendChild(ulNav);
 // array de links
-const links = ["Index", "Productos", "Contacto"];
+const links = ["Inicio", "Productos", "Contacto"];
 for( link of links) {
     const liNav = document.createElement ('li');
     liNav.id = ('idLiNav');
-    liNav.innerHTML = `<a href="./pages/${link.toLowerCase()}.html">${link}</a>`;
+    liNav.innerHTML = `<a href="./${link.toLowerCase()}.html">${link}</a>`;
     ulNav.appendChild(liNav);
 }
 
