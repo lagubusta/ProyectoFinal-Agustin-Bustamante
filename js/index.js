@@ -30,28 +30,28 @@ articulo1.style.fontFamily ='buda';
 
 
 
-class Vendedor {
-    constructor(nombre, apellido, edad, ciudad, zona) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = parseInt(edad);
-        this.ciudad = ciudad;
-        this.zona = zona;
-    }
-};
-const empleadosVendedores = [];
+// class Vendedor {
+//     constructor(nombre, apellido, edad, ciudad, zona) {
+//         this.nombre = nombre;
+//         this.apellido = apellido;
+//         this.edad = parseInt(edad);
+//         this.ciudad = ciudad;
+//         this.zona = zona;
+//     }
+// };
+// const empleadosVendedores = [];
 
-function agregarVendedor() {
-    const nombreNvendedor = prompt("Ingresa el nombre del nuevo vendedor/ra.");
-    const apellidoNvendedor = prompt("Ingresa el apellido de " + nombreNvendedor);
-    const edadNvendedor = parseInt(prompt("Ingresa la edad de " + nombreNvendedor));
-    const ciudadNvendedor = prompt("Ingresa la ciudad donde opera " + nombreNvendedor);
-    const zonaNvendedor = prompt("Si Bs. As. capital es el centro, ¿" + ciudadNvendedor + " donde se encuentra?");
+// function agregarVendedor() {
+//     const nombreNvendedor = prompt("Ingresa el nombre del nuevo vendedor/ra.");
+//     const apellidoNvendedor = prompt("Ingresa el apellido de " + nombreNvendedor);
+//     const edadNvendedor = parseInt(prompt("Ingresa la edad de " + nombreNvendedor));
+//     const ciudadNvendedor = prompt("Ingresa la ciudad donde opera " + nombreNvendedor);
+//     const zonaNvendedor = prompt("Si Bs. As. capital es el centro, ¿" + ciudadNvendedor + " donde se encuentra?");
 
-    const nuevoVendedor = new Vendedor(nombreNvendedor, apellidoNvendedor, edadNvendedor, ciudadNvendedor, zonaNvendedor);
-    empleadosVendedores.push(nuevoVendedor);
-}
-agregarVendedor();
+//     const nuevoVendedor = new Vendedor(nombreNvendedor, apellidoNvendedor, edadNvendedor, ciudadNvendedor, zonaNvendedor);
+//     empleadosVendedores.push(nuevoVendedor);
+// }
+// agregarVendedor();
 
 
 

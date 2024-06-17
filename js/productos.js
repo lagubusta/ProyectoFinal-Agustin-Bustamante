@@ -15,21 +15,17 @@ divCarrito.style.fontSize = '18px';
 divCarrito.style.padding = '6rem';
 
 const products = [  //2.
-    { id: 1, nombre: "Azucar", precio: 1080, },
-    { id: 2, nombre: "Yerba", precio: 1700, },
-    { id: 3, nombre: "Dulce de Leche", precio: 500, },
-    { id: 4, nombre: "Miel", precio: 2300, },
-    { id: 5, nombre: "Manetca", precio: 150, },
-    { id: 6, nombre: "Café", precio: 6000, },
+    { id: 1, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
+    { id: 2, nombre: "Dark Side of the Moon", precio: 25000, },
+    { id: 3, nombre: "Dark Side of the Moon 1973", precio: 20000, },
+    { id: 4, nombre: "The Wall", precio: 23000, },
+    { id: 5, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
+    { id: 6, nombre: "Buzo The Wall", precio: 15000, },
 ];
 let cart = loadCartFromLocalStorage();  //3.
 
 function addToCart(productId, cantidad) { //4.
     const product = products.find(p => p.id === productId);  //4.1.
-    if (!product) { //4.2.
-        console.error("El producto no fue encontrado");
-        return;
-    }
     const cartItem = cart.find(item => item.id === productId); //4.3.
     if (cartItem) { //4.4.
         cartItem.cantidad += cantidad;
@@ -60,19 +56,22 @@ function renderProducts() { //6.
 
     products.forEach(product => { //6.3
         const productDiv = document.createElement('div'); //6.4
+        productDiv.id = 'productDivId';
         productDiv.innerHTML = `
+        <img src="../img/f${product.id}.webp" alt="foto${product.id}">
         <p>${product.nombre} - $${product.precio}</p> <br><hr><br>
         <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
         `;
         productList.appendChild(productDiv); //6.5
-        productDiv.style.backgroundColor = 'white';
+        productDiv.style.backgroundColor = '#150320';
         productDiv.style.padding = '1rem';
+        productDiv.style.color = '#b88d00';
         productDiv.style.textAlign = 'center';
         productDiv.style.minHeight = '12rem';
-        productDiv.style.maxHeight = '16rem';
         productDiv.style.flexBasis = 'calc(33.33% - 2rem)';
         productDiv.style.margin = '1rem';
         productDiv.style.boxSizing = 'border-box';
+        productDiv.style.overflow = 'hidden';
     });
 }
 
@@ -82,7 +81,6 @@ function renderCart() { //7.
     cartDiv.style.padding = '1rem';
     cartDiv.style.display = 'flex';
     cartDiv.style.flexDirection = 'column';
-    // cartDiv.style.alignItems = 'flex-start';
     cartDiv.innerHTML = ''; //7.2
     cart.forEach(item => { //7.3
         const cartItemDiv = document.createElement('div');
@@ -94,14 +92,16 @@ function renderCart() { //7.
         cartDiv.appendChild(cartItemDiv); //7.4
     });
     const totalDiv = document.createElement('div'); //8.
-    const finalizarCompra = document.createElement('button');
     const vaciarCarro = document.createElement('button');
-
+    const finalizarCompra = document.createElement('button');
     finalizarCompra.textContent = 'Finalizar Compra';
-    
+ 
     totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`; //8.1
     cartDiv.appendChild(totalDiv); //8.2
     totalDiv.appendChild(finalizarCompra);
+    finalizarCompra.addEventListener('click', compraFinalizada);
+
+    totalDiv.className ='totalDiv';
     totalDiv.style.alignSelf = 'flex-end'
     totalDiv.style.color = 'colorAmarillo';
     totalDiv.style.fontSize = '2rem';
@@ -112,9 +112,19 @@ function renderCart() { //7.
     totalDiv.appendChild(vaciarCarro);
     vaciarCarro.textContent = 'Vaciar';
     vaciarCarro.style.margin = '1.5rem';
-    
+    vaciarCarro.addEventListener('click', vaciarCarritoF);
+}
+function compraFinalizada(){
+    cart=[];
+    alert("Tu compra se realizo con exito. ¡Gracias!");
+    saveCartToLocalStorage();
+    renderCart();
+}
 
-
+function vaciarCarritoF(){
+    cart=[];
+    saveCartToLocalStorage();
+    renderCart();
 }
 function saveCartToLocalStorage() {   //9.
     localStorage.setItem('cart', JSON.stringify(cart)); //9.1
