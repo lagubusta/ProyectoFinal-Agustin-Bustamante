@@ -1,4 +1,6 @@
 
+
+
 // Titular
 const divContenedor1 = document.createElement('div');
 cuerpo.appendChild(divContenedor1);
@@ -97,7 +99,6 @@ articulo2.addEventListener('mouseover', () => {
 articulo2.addEventListener('mouseout', () => {
     articulo2.style.color = 'Black';
     articulo2.style.backgroundColor = colorAmarillo;
-    // articulo2.style.height = '2rem';
     articulo2.style.width = '50%';
     articulo2.style.padding = '1rem';
     articulo2.style.fontFamily = 'buda';
