@@ -17,7 +17,7 @@ divCarrito.style.fontSize = '18px';
 divCarrito.style.padding = '6rem';
 
 // Arry de productos.
-const products = [  //2.
+const products = [
     { id: 1, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
     { id: 2, nombre: "Dark Side of the Moon", precio: 25000, },
     { id: 3, nombre: "Dark Side of the Moon 1973", precio: 20000, },
@@ -26,16 +26,16 @@ const products = [  //2.
     { id: 6, nombre: "Buzo The Wall", precio: 15000, },
 ];
 // Local Storage con carrito
-let cart = loadCartFromLocalStorage();  //3.
+let cart = loadCartFromLocalStorage();
 
-function addToCart(productId, cantidad) { //4.
-    const product = products.find(p => p.id === productId);  //4.1.
-    const cartItem = cart.find(item => item.id === productId); //4.3.
-    if (cartItem) { //4.4.
+function addToCart(productId, cantidad) {
+    const product = products.find(p => p.id === productId);  
+    const cartItem = cart.find(item => item.id === productId); 
+    if (cartItem) { 
         cartItem.cantidad += cantidad;
-        cartItem.subTotal = cartItem.cantidad * product.precio; //4.5.
-    } else { //4.6.
-        cart.push({ //4.6.1
+        cartItem.subTotal = cartItem.cantidad * product.precio; 
+    } else {
+        cart.push({
             id: product.id,
             nombre: product.nombre,
             precio: product.precio,
@@ -43,31 +43,31 @@ function addToCart(productId, cantidad) { //4.
             subTotal: cantidad * product.precio,
         })
     }
-    saveCartToLocalStorage(); //4.7.
-    renderCart(); //4.8.
+    saveCartToLocalStorage();
+    renderCart();
 };
 // Calcular total
-function calculateTotal() { //5.
+function calculateTotal() {
     return cart.reduce((total, item) => total + item.subTotal, 0);
 }
-function renderProducts() { //6.
-    const productList = document.getElementById('product-list'); //6.1
-    productList.innerHTML = ''; //6.2
+function renderProducts() {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = '';
     productList.style.display = 'flex';
     productList.style.textAlign = 'center';
     productList.style.justifyContent = 'center'
     productList.style.alignItems = 'center'
     productList.style.verticalAlign = 'middle';
 
-    products.forEach(product => { //6.3
-        const productDiv = document.createElement('div'); //6.4
+    products.forEach(product => {
+        const productDiv = document.createElement('div');
         productDiv.id = 'productDivId';
         productDiv.innerHTML = `
         <img src="../img/f${product.id}.webp" alt="foto${product.id}">
         <p>${product.nombre} - $${product.precio}</p> <br><hr><br>
         <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
         `;
-        productList.appendChild(productDiv); //6.5
+        productList.appendChild(productDiv);
         productDiv.style.backgroundColor = '#150320';
         productDiv.style.padding = '1rem';
         productDiv.style.color = '#b88d00';
@@ -80,38 +80,41 @@ function renderProducts() { //6.
     });
 }
 
-function renderCart() { //7.
-    const cartDiv = document.getElementById('cart'); //7.1
+function renderCart() {
+    const cartDiv = document.getElementById('cart');
     cartDiv.style.backgroundColor = '#4c1e69';
     cartDiv.style.padding = '1rem';
     cartDiv.style.display = 'flex';
     cartDiv.style.flexDirection = 'column';
-    cartDiv.innerHTML = ''; //7.2
-    cart.forEach(item => { //7.3
+    cartDiv.innerHTML = '';
+    cart.forEach(item => {
         const cartItemDiv = document.createElement('div');
         cartItemDiv.innerHTML = `
         <p>${item.nombre}: ${item.precio} x ${item.cantidad} = $${item.subTotal}</p>
         `;
         cartItemDiv.style.backgroundColor = '#150320';
         cartItemDiv.style.padding = '1rem';
-        cartDiv.appendChild(cartItemDiv); //7.4
+        cartDiv.appendChild(cartItemDiv);
     });
-    const totalDiv = document.createElement('div'); //8.
+    const totalDiv = document.createElement('div');
     const vaciarCarro = document.createElement('button');
     const finalizarCompra = document.createElement('button');
     finalizarCompra.textContent = 'Finalizar Compra';
  
-    totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`; //8.1
-    cartDiv.appendChild(totalDiv); //8.2
+    totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`;
+    cartDiv.appendChild(totalDiv);
     totalDiv.appendChild(finalizarCompra);
     finalizarCompra.addEventListener('click', compraFinalizada);
 
     totalDiv.className ='totalDiv';
+    
     totalDiv.style.alignSelf = 'flex-end'
     totalDiv.style.color = 'colorAmarillo';
+    totalDiv.style.backgroundColor = '#150320';
     totalDiv.style.fontSize = '2rem';
-    totalDiv.style.padding = '1.5rem';
-    totalDiv.style.fontFamily = 'Impact';
+    totalDiv.style.marginTop = '1rem';
+    totalDiv.style.padding = '1.3rem';
+    totalDiv.style.fontFamily = 'buda';
     totalDiv.style.textAlign = 'center';
 
     totalDiv.appendChild(vaciarCarro);
@@ -131,14 +134,14 @@ function vaciarCarritoF(){
     saveCartToLocalStorage();
     renderCart();
 }
-function saveCartToLocalStorage() {   //9.
-    localStorage.setItem('cart', JSON.stringify(cart)); //9.1
+function saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart));
 }
-function loadCartFromLocalStorage() {   // 9.2
+function loadCartFromLocalStorage() {  
     const cartData = localStorage.getItem('cart');
     return cartData ? JSON.parse(cartData) : [];
 }
-document.addEventListener('DOMContentLoaded', () => {    //10.
+document.addEventListener('DOMContentLoaded', () => {   
     renderProducts();
     renderCart();
 });
