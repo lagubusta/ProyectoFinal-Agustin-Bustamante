@@ -19,7 +19,7 @@ const ulNav = document.createElement ('ul');
 ulNav.id=('idUl');
 navegador.appendChild(ulNav);
 // array de links
-const links = ["Inicio", "Productos"];
+const links = ["Index", "Productos"];
 for( link of links) {
     const liNav = document.createElement ('li');
     liNav.id = ('idLiNav');
