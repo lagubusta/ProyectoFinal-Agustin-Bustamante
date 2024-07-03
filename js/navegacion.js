@@ -23,7 +23,7 @@ const links = ["Index", "Productos", "Promesas"];
 for( link of links) {
     const liNav = document.createElement ('li');
     liNav.id = ('idLiNav');
-    liNav.innerHTML = `<a href="./${link.toLowerCase()}.html">${link}</a>`;
+    liNav.innerHTML = `<a href="../${link.toLowerCase()}.html">${link}</a>`;
     ulNav.appendChild(liNav);
 }
 
