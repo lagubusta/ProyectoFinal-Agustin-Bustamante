@@ -107,21 +107,4 @@ articulo2.addEventListener('mouseout', () => {
     articulo2.style.justifyContent = 'right';
     parraA2.style.display = 'none';
 });
-//////////////////////////////////////////////////////////////////// DIV CARRITO 3
-    const carreteMiniCarrito = document.createElement('div');
-    carreteMiniCarrito.style.backgroundColor = 'red';
-    carreteMiniCarrito.style.width = '95%';
-    carreteMiniCarrito.style.margin = 'auto';
-    carreteMiniCarrito.style.height = '200px';
-    carreteMiniCarrito.textContent = 'hola';
-    cuerpo.appendChild(carreteMiniCarrito);
 
-    const divListaProductos = document.createElement('div');
-    divListaProductos.id = ('product-list');
-    cuerpo.appendChild(divListaProductos);
-    divListaProductos.style.padding = '1rem'
-    divListaProductos.style.display = 'flex';
-    divListaProductos.style.flexWrap = 'wrap';
-
-
-//////////////////////////////////////////////////////////////////// DIV CARRITO 3

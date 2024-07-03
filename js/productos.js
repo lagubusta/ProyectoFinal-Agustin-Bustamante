@@ -15,19 +15,25 @@ divCarrito.style.color = colorAmarillo;
 divCarrito.style.fontSize = '18px';
 divCarrito.style.padding = '6rem';
 
+// Div contenedor de historial de compras
+const divHistorialCompras = document.createElement('div');
+divHistorialCompras.id = ('historial-compras');
+cuerpo.appendChild(divHistorialCompras);
+divHistorialCompras.style.padding = '1rem';
+divHistorialCompras.style.display = 'none';
+
 // Array de productos.
 const products = [
-    { id: 1, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
-    { id: 2, nombre: "Dark Side of the Moon", precio: 25000, },
-    { id: 3, nombre: "Dark Side of the Moon 1973", precio: 20000, },
-    { id: 4, nombre: "The Wall", precio: 23000, },
-    { id: 5, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
-    { id: 6, nombre: "Buzo The Wall", precio: 15000, },
+    { id: 1, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000 },
+    { id: 2, nombre: "Dark Side of the Moon", precio: 25000 },
+    { id: 3, nombre: "Dark Side of the Moon 1973", precio: 20000 },
+    { id: 4, nombre: "The Wall", precio: 23000 },
+    { id: 5, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000 },
+    { id: 6, nombre: "Buzo The Wall", precio: 15000 },
 ];
 
 // Local Storage con carrito
-let cart = loadCartFromLocalStorage();
-
+let cart = recuperrarCarrito();
 function addToCart(productId, cantidad) {
     const product = products.find(p => p.id === productId);
     const cartItem = cart.find(item => item.id === productId);
@@ -47,10 +53,10 @@ function addToCart(productId, cantidad) {
             subTotal: cantidad * product.precio,
         });
     }
-    saveCartToLocalStorage();
+    guardarCarritoEnLocalStorage();
     renderCart();
 
-    // Sweet Alert
+    // Sweet Alert cargado al carrito
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -112,27 +118,7 @@ function renderCart() {
     cartDiv.style.display = 'flex';
     cartDiv.style.flexDirection = 'column';
     cartDiv.innerHTML = '';
-//     /////////////////////////////////////////////////////// original
-//     // cart.forEach(item => {
-//     //     const cartItemDiv = document.createElement('div');
-//     //     cartItemDiv.innerHTML = `
-//     //     <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
-//     //     `;
-//     //     cartItemDiv.innerHTML = `
-//     //     <p>${item.nombre}: $${item.precio} x  ${item.cantidad} = $${item.subTotal}
-//     //     <button onclick="addToCart(${item.id}, -1)">-</button>
-//     //     <button onclick="addToCart(${item.id}, 1)">+</button>
-//     //     <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
-//     // `;
-//     // cartItemDiv.style.backgroundColor = '#150320';
-//     //     cartItemDiv.style.padding = '1rem';
-//     //     cartDiv.appendChild(cartItemDiv);
-//     // });
 
-//     //////////////////////////////////////////////////////////// prueba de tabla
-//     //////////////////////////////////////////////////////////// prueba de tabla
-//     //////////////////////////////////////////////////////////// prueba de tabla
-//     //////////////////////////////////////////////////////////// prueba de tabla
     cart.forEach(item => {
         const cartItemDiv = document.createElement('table');
         cartItemDiv.id = 'idTabla';
@@ -141,93 +127,89 @@ function renderCart() {
         cartItemDiv.style.width = '100%'; // Ancho de la tabla al 100%
 
         // Crear una fila (tr) para cada elemento del carrito
-        const row = document.createElement('tr');
+        const fila = document.createElement('tr');
 
-        // Celda para el nombre del artículo (alineado a la izquierda)
-        const nameCell = document.createElement('td');
-        nameCell.textContent = item.nombre + ': ';
-        nameCell.style.width = '30%'; // Ancho fijo para el nombre del artículo
-        row.appendChild(nameCell);
+        // Celda para el nombre del producto
+        const nombreCelda = document.createElement('td');
+        nombreCelda.textContent = item.nombre + ': ';
+        nombreCelda.style.width = '30%';
+        fila.appendChild(nombreCelda);
 
-        // Celda para el precio (centrado)
-        const priceCell = document.createElement('td');
-        priceCell.textContent = '$' + item.precio;
-        priceCell.style.textAlign = 'center'; // Estilo centrado
-        priceCell.style.width = '20%'; // Ancho fijo para el precio
-        row.appendChild(priceCell);
+        // Celda para el precio
+        const precioCelda = document.createElement('td');
+        precioCelda.textContent = '$' + item.precio;
+        precioCelda.style.textAlign = 'center';
+        precioCelda.style.width = '20%'; // Ancho fijo para el precio
+        fila.appendChild(precioCelda);
 
-        // Celda para la cantidad (centrado)
-        const quantityCell = document.createElement('td');
-        quantityCell.textContent = item.cantidad;
-        quantityCell.style.textAlign = 'center'; // Estilo centrado
-        quantityCell.style.width = '10%'; // Ancho fijo para la cantidad
-        row.appendChild(quantityCell);
+        // Celda para la cantidad
+        const cantidadCelda = document.createElement('td');
+        cantidadCelda.textContent = item.cantidad;
+        cantidadCelda.style.textAlign = 'center';
+        cantidadCelda.style.width = '10%'; // Ancho fijo para la cantidad
+        fila.appendChild(cantidadCelda);
 
-        // Celda para el subtotal (centrado)
-        const subtotalCell = document.createElement('td');
-        subtotalCell.textContent = '$' + item.subTotal;
-        subtotalCell.style.textAlign = 'center'; // Estilo centrado
-        subtotalCell.style.width = '20%'; // Ancho fijo para el subtotal
-        row.appendChild(subtotalCell);
+        // Celda para el subtotal
+        const subtotalCelda = document.createElement('td');
+        subtotalCelda.textContent = '$' + item.subTotal;
+        subtotalCelda.style.textAlign = 'center';
+        subtotalCelda.style.width = '20%';
+        fila.appendChild(subtotalCelda);
 
-        // Celda para los botones (centrado)
-        const buttonCell = document.createElement('td');
-        buttonCell.style.textAlign = 'center'; // Estilo centrado
-        buttonCell.style.width = '20%'; // Ancho fijo para los botones
+        // Celda para los botones
+        const buttonCelda = document.createElement('td');
+        buttonCelda.style.textAlign = 'center';
+        buttonCelda.style.width = '20%';
 
-        // Botón para disminuir cantidad
-        const decreaseButton = document.createElement('button');
-        decreaseButton.textContent = '-';
-        decreaseButton.onclick = () => addToCart(item.id, -1);
-        decreaseButton.style.margin = '0.5rem';
-        decreaseButton.style.background = colorAmarillo;
-        decreaseButton.style.color = '#150320';
-        buttonCell.appendChild(decreaseButton);
+        // Botón sacar cantidad
+        const sacarButton = document.createElement('button');
+        sacarButton.textContent = '-';
+        sacarButton.onclick = () => addToCart(item.id, -1);
+        sacarButton.style.margin = '0.5rem';
+        sacarButton.style.background = colorAmarillo;
+        sacarButton.style.color = '#150320';
+        buttonCelda.appendChild(sacarButton);
 
-        // Botón para aumentar cantidad
-        const increaseButton = document.createElement('button');
-        increaseButton.textContent = '+';
-        increaseButton.onclick = () => addToCart(item.id, 1);
-        increaseButton.style.margin = '0.5rem';
-        increaseButton.style.background = colorAmarillo;
-        increaseButton.style.color = '#150320';
-        buttonCell.appendChild(increaseButton);
+        // Botón sumar cantidad
+        const sumarButton = document.createElement('button');
+        sumarButton.textContent = '+';
+        sumarButton.onclick = () => addToCart(item.id, 1);
+        sumarButton.style.margin = '0.5rem';
+        sumarButton.style.background = colorAmarillo;
+        sumarButton.style.color = '#150320';
+        buttonCelda.appendChild(sumarButton);
 
-        // Botón para eliminar artículo
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Eliminar';
-        removeButton.onclick = () => removeFromCart(item.id);
-        removeButton.style.margin = '0.5rem';
-        removeButton.style.background = 'red';
-        removeButton.style.color = 'white';
-        buttonCell.appendChild(removeButton);
-
-        row.appendChild(buttonCell);
+        // Botón eliminar producto
+        const eliminarButton = document.createElement('button');
+        eliminarButton.textContent = 'Eliminar';
+        eliminarButton.onclick = () => sacarDelCarrito(item.id);
+        eliminarButton.style.margin = '0.5rem';
+        eliminarButton.style.background = 'red';
+        eliminarButton.style.color = 'white';
+        buttonCelda.appendChild(eliminarButton);
+        fila.appendChild(buttonCelda);
 
         // Agregar la fila a la tabla
-        cartItemDiv.appendChild(row);
+        cartItemDiv.appendChild(fila);
 
         // Agregar la tabla al contenedor del carrito (cartDiv)
         cartDiv.appendChild(cartItemDiv);
     });
 
-
-//     //////////////////////////////////////////////////////////// prueba de tabla
-//     //////////////////////////////////////////////////////////// prueba de tabla
-//     //////////////////////////////////////////////////////////// prueba de tabla
-//     //////////////////////////////////////////////////////////// prueba de tabla
-
-
-
+    // Div cuadro total
     const totalDiv = document.createElement('div');
     const vaciarCarro = document.createElement('button');
     const finalizarCompra = document.createElement('button');
     finalizarCompra.textContent = 'Finalizar Compra';
+    const verHistorial = document.createElement('button');
+    verHistorial.textContent = 'Ver Compras';
 
     totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`;
     cartDiv.appendChild(totalDiv);
     totalDiv.appendChild(finalizarCompra);
     finalizarCompra.addEventListener('click', compraFinalizada);
+    totalDiv.appendChild(verHistorial);
+    verHistorial.addEventListener('click', mostrarHistorialCompras);
 
     totalDiv.className = 'totalDiv';
     totalDiv.style.alignSelf = 'flex-end';
@@ -242,21 +224,31 @@ function renderCart() {
     totalDiv.appendChild(vaciarCarro);
     vaciarCarro.textContent = 'Vaciar';
     vaciarCarro.style.margin = '1.5rem';
-    vaciarCarro.addEventListener('click', vaciarCarritoF);
+    vaciarCarro.addEventListener('click', vaciarCarritoFormula);
 }
 
-function removeFromCart(productId) {
+function sacarDelCarrito(productId) {
     cart = cart.filter(item => item.id !== productId);
-    saveCartToLocalStorage();
+    guardarCarritoEnLocalStorage();
     renderCart();
 }
 
 function compraFinalizada() {
+    // Historial de compras desde el localStorage
+    const historialCompras = JSON.parse(localStorage.getItem('historialCompras')) || [];
+
+    // Sumar nuevo carrito al historial
+    if (cart.length > 0) {
+        historialCompras.push({ date: new Date().toLocaleDateString(), items: cart });
+        localStorage.setItem('historialCompras', JSON.stringify(historialCompras));
+    }
+
+    // Vaciar el carrito una vez finalizada la compra.
     cart = [];
-    saveCartToLocalStorage();
+    guardarCarritoEnLocalStorage();
     renderCart();
 
-    // Sweet Alert
+    // Sweet Alert compra finalizada
     Swal.fire({
         title: "Compra finalizada",
         icon: "info",
@@ -265,19 +257,63 @@ function compraFinalizada() {
     });
 }
 
-function vaciarCarritoF() {
+function vaciarCarritoFormula() {
     cart = [];
-    saveCartToLocalStorage();
+    guardarCarritoEnLocalStorage();
     renderCart();
 }
 
-function saveCartToLocalStorage() {
+function guardarCarritoEnLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-function loadCartFromLocalStorage() {
+function recuperrarCarrito() {
     const cartData = localStorage.getItem('cart');
     return cartData ? JSON.parse(cartData) : [];
+}
+
+// Mostrar el historial de compras
+
+function mostrarHistorialCompras() {
+    const divHistorial = document.getElementById('historial-compras');
+    const historialCompras = JSON.parse(localStorage.getItem('historialCompras')) || [];
+
+    // Alternar la visibilidad del div
+    if (divHistorial.style.display === 'none' || divHistorial.style.display === '') {
+        divHistorial.innerHTML = '';
+
+        if (historialCompras.length === 0) {
+            divHistorial.innerHTML = '<h3>Todavía no realizaste tu primera compra</h3>';
+        } else {
+            historialCompras.forEach(compra => {
+                const comprasDiv = document.createElement('div');
+                comprasDiv.style.backgroundColor = '#150320';
+                comprasDiv.style.fontFamily = 'buda';
+                comprasDiv.style.padding = '1rem';
+                comprasDiv.style.marginBottom = '1rem';
+                const dateP = document.createElement('p');
+                dateP.textContent = `Fecha: ${compra.date}`;
+                dateP.style.color = '#b88d00';
+
+                comprasDiv.appendChild(dateP);
+
+                compra.items.forEach(item => {
+                    const itemP = document.createElement('p');
+                    itemP.textContent = `${item.nombre} - Cantidad: ${item.cantidad} - Subtotal: $${item.subTotal}`;
+                    itemP.style.color = '#b88d00';
+                    comprasDiv.appendChild(itemP);
+                });
+
+                divHistorial.appendChild(comprasDiv);
+                
+            });
+        }
+
+        divHistorial.style.display = 'block';
+        
+    } else {
+        divHistorial.style.display = 'none';
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

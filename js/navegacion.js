@@ -32,3 +32,8 @@ const colorAmarillo = '#d6a505';
 
 
 
+/////////////////////////////////////////////////////////////////////////
+// footer
+
+const footer = document.createElement('footer');
+cuerpo.appendChild(footer);
