@@ -1,4 +1,3 @@
-
 // Div contenedor de lista de productos
 const divListaProductos = document.createElement('div');
 divListaProductos.id = ('product-list');
@@ -16,7 +15,7 @@ divCarrito.style.color = colorAmarillo;
 divCarrito.style.fontSize = '18px';
 divCarrito.style.padding = '6rem';
 
-// Arry de productos.
+// Array de productos.
 const products = [
     { id: 1, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
     { id: 2, nombre: "Dark Side of the Moon", precio: 25000, },
@@ -25,15 +24,20 @@ const products = [
     { id: 5, nombre: "UK-JAPAN-EEUU-EU Black", precio: 19000, },
     { id: 6, nombre: "Buzo The Wall", precio: 15000, },
 ];
+
 // Local Storage con carrito
 let cart = loadCartFromLocalStorage();
 
 function addToCart(productId, cantidad) {
-    const product = products.find(p => p.id === productId);  
-    const cartItem = cart.find(item => item.id === productId); 
-    if (cartItem) { 
+    const product = products.find(p => p.id === productId);
+    const cartItem = cart.find(item => item.id === productId);
+    if (cartItem) {
         cartItem.cantidad += cantidad;
-        cartItem.subTotal = cartItem.cantidad * product.precio; 
+        if (cartItem.cantidad <= 0) {
+            cart = cart.filter(item => item.id !== productId);
+        } else {
+            cartItem.subTotal = cartItem.cantidad * product.precio;
+        }
     } else {
         cart.push({
             id: product.id,
@@ -41,31 +45,53 @@ function addToCart(productId, cantidad) {
             precio: product.precio,
             cantidad: cantidad,
             subTotal: cantidad * product.precio,
-        })
+        });
     }
     saveCartToLocalStorage();
     renderCart();
-};
+
+    // Sweet Alert
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        iconColor: '#23003a',
+        title: `${product.nombre} está en el carrito`,
+        color: '#23003a',
+        background: colorAmarillo,
+    });
+}
+
 // Calcular total
 function calculateTotal() {
     return cart.reduce((total, item) => total + item.subTotal, 0);
 }
+
 function renderProducts() {
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
     productList.style.display = 'flex';
     productList.style.textAlign = 'center';
-    productList.style.justifyContent = 'center'
-    productList.style.alignItems = 'center'
+    productList.style.justifyContent = 'center';
+    productList.style.alignItems = 'center';
     productList.style.verticalAlign = 'middle';
 
     products.forEach(product => {
         const productDiv = document.createElement('div');
         productDiv.id = 'productDivId';
         productDiv.innerHTML = `
-        <img src="../img/f${product.id}.webp" alt="foto${product.id}">
-        <p>${product.nombre} - $${product.precio}</p> <br><hr><br>
-        <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
+            <img src="./img/f${product.id}.webp" alt="foto${product.id}">
+            <p>${product.nombre} - $${product.precio}</p> <br><hr><br>
+            <button onclick="addToCart(${product.id}, 1)">Agregar al carrito</button>
         `;
         productList.appendChild(productDiv);
         productDiv.style.backgroundColor = '#150320';
@@ -87,28 +113,29 @@ function renderCart() {
     cartDiv.style.display = 'flex';
     cartDiv.style.flexDirection = 'column';
     cartDiv.innerHTML = '';
+
     cart.forEach(item => {
         const cartItemDiv = document.createElement('div');
         cartItemDiv.innerHTML = `
-        <p>${item.nombre}: ${item.precio} x ${item.cantidad} = $${item.subTotal}</p>
+            <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Remover</button></p>
         `;
         cartItemDiv.style.backgroundColor = '#150320';
         cartItemDiv.style.padding = '1rem';
         cartDiv.appendChild(cartItemDiv);
     });
+
     const totalDiv = document.createElement('div');
     const vaciarCarro = document.createElement('button');
     const finalizarCompra = document.createElement('button');
     finalizarCompra.textContent = 'Finalizar Compra';
- 
+
     totalDiv.innerHTML = `<p>Total: $${calculateTotal()}</p>`;
     cartDiv.appendChild(totalDiv);
     totalDiv.appendChild(finalizarCompra);
     finalizarCompra.addEventListener('click', compraFinalizada);
 
-    totalDiv.className ='totalDiv';
-    
-    totalDiv.style.alignSelf = 'flex-end'
+    totalDiv.className = 'totalDiv';
+    totalDiv.style.alignSelf = 'flex-end';
     totalDiv.style.color = 'colorAmarillo';
     totalDiv.style.backgroundColor = '#150320';
     totalDiv.style.fontSize = '2rem';
@@ -122,29 +149,43 @@ function renderCart() {
     vaciarCarro.style.margin = '1.5rem';
     vaciarCarro.addEventListener('click', vaciarCarritoF);
 }
-function compraFinalizada(){
-    cart=[];
-    alert("Tu compra se realizo con exito. ¡Gracias!");
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
     saveCartToLocalStorage();
     renderCart();
 }
 
-function vaciarCarritoF(){
-    cart=[];
+function compraFinalizada() {
+    cart = [];
+    saveCartToLocalStorage();
+    renderCart();
+
+    // Sweet Alert
+    Swal.fire({
+        title: "Compra finalizada",
+        icon: "info",
+        imageHeight: 150,
+        icon: "success",
+    });
+}
+
+function vaciarCarritoF() {
+    cart = [];
     saveCartToLocalStorage();
     renderCart();
 }
+
 function saveCartToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
-function loadCartFromLocalStorage() {  
+
+function loadCartFromLocalStorage() {
     const cartData = localStorage.getItem('cart');
     return cartData ? JSON.parse(cartData) : [];
 }
-document.addEventListener('DOMContentLoaded', () => {   
+
+document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
     renderCart();
 });
-
-
-
