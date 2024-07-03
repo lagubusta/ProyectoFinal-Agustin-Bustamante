@@ -112,27 +112,27 @@ function renderCart() {
     cartDiv.style.display = 'flex';
     cartDiv.style.flexDirection = 'column';
     cartDiv.innerHTML = '';
-    /////////////////////////////////////////////////////// original
-    // cart.forEach(item => {
-    //     const cartItemDiv = document.createElement('div');
-    //     cartItemDiv.innerHTML = `
-    //     <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
-    //     `;
-    //     cartItemDiv.innerHTML = `
-    //     <p>${item.nombre}: $${item.precio} x  ${item.cantidad} = $${item.subTotal}
-    //     <button onclick="addToCart(${item.id}, -1)">-</button>
-    //     <button onclick="addToCart(${item.id}, 1)">+</button>
-    //     <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
-    // `;
-    // cartItemDiv.style.backgroundColor = '#150320';
-    //     cartItemDiv.style.padding = '1rem';
-    //     cartDiv.appendChild(cartItemDiv);
-    // });
+//     /////////////////////////////////////////////////////// original
+//     // cart.forEach(item => {
+//     //     const cartItemDiv = document.createElement('div');
+//     //     cartItemDiv.innerHTML = `
+//     //     <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
+//     //     `;
+//     //     cartItemDiv.innerHTML = `
+//     //     <p>${item.nombre}: $${item.precio} x  ${item.cantidad} = $${item.subTotal}
+//     //     <button onclick="addToCart(${item.id}, -1)">-</button>
+//     //     <button onclick="addToCart(${item.id}, 1)">+</button>
+//     //     <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
+//     // `;
+//     // cartItemDiv.style.backgroundColor = '#150320';
+//     //     cartItemDiv.style.padding = '1rem';
+//     //     cartDiv.appendChild(cartItemDiv);
+//     // });
 
-    //////////////////////////////////////////////////////////// prueba de tabla
-    //////////////////////////////////////////////////////////// prueba de tabla
-    //////////////////////////////////////////////////////////// prueba de tabla
-    //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
     cart.forEach(item => {
         const cartItemDiv = document.createElement('table');
         cartItemDiv.id = 'idTabla';
@@ -212,10 +212,10 @@ function renderCart() {
     });
 
 
-    //////////////////////////////////////////////////////////// prueba de tabla
-    //////////////////////////////////////////////////////////// prueba de tabla
-    //////////////////////////////////////////////////////////// prueba de tabla
-    //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
+//     //////////////////////////////////////////////////////////// prueba de tabla
 
 
 
