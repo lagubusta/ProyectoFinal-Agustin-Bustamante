@@ -117,8 +117,17 @@ function renderCart() {
     cart.forEach(item => {
         const cartItemDiv = document.createElement('div');
         cartItemDiv.innerHTML = `
-            <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Remover</button></p>
+            <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
         `;
+        cartItemDiv.innerHTML = `
+        <p>${item.nombre}: $${item.precio} x  ${item.cantidad} = $${item.subTotal}
+        <button onclick="addToCart(${item.id}, -1)">-</button>
+        <button onclick="addToCart(${item.id}, 1)">+</button>
+        <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
+    `;
+
+
+
         cartItemDiv.style.backgroundColor = '#150320';
         cartItemDiv.style.padding = '1rem';
         cartDiv.appendChild(cartItemDiv);
