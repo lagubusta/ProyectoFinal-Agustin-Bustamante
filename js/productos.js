@@ -70,7 +70,6 @@ function addToCart(productId, cantidad) {
         background: colorAmarillo,
     });
 }
-
 // Calcular total
 function calculateTotal() {
     return cart.reduce((total, item) => total + item.subTotal, 0);
@@ -113,25 +112,112 @@ function renderCart() {
     cartDiv.style.display = 'flex';
     cartDiv.style.flexDirection = 'column';
     cartDiv.innerHTML = '';
+    /////////////////////////////////////////////////////// original
+    // cart.forEach(item => {
+    //     const cartItemDiv = document.createElement('div');
+    //     cartItemDiv.innerHTML = `
+    //     <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
+    //     `;
+    //     cartItemDiv.innerHTML = `
+    //     <p>${item.nombre}: $${item.precio} x  ${item.cantidad} = $${item.subTotal}
+    //     <button onclick="addToCart(${item.id}, -1)">-</button>
+    //     <button onclick="addToCart(${item.id}, 1)">+</button>
+    //     <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
+    // `;
+    // cartItemDiv.style.backgroundColor = '#150320';
+    //     cartItemDiv.style.padding = '1rem';
+    //     cartDiv.appendChild(cartItemDiv);
+    // });
 
+    //////////////////////////////////////////////////////////// prueba de tabla
+    //////////////////////////////////////////////////////////// prueba de tabla
+    //////////////////////////////////////////////////////////// prueba de tabla
+    //////////////////////////////////////////////////////////// prueba de tabla
     cart.forEach(item => {
-        const cartItemDiv = document.createElement('div');
-        cartItemDiv.innerHTML = `
-            <p>${item.nombre}: $${item.precio} x <button onclick="addToCart(${item.id}, -1)">-</button> ${item.cantidad} <button onclick="addToCart(${item.id}, 1)">+</button> = $${item.subTotal} <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
-        `;
-        cartItemDiv.innerHTML = `
-        <p>${item.nombre}: $${item.precio} x  ${item.cantidad} = $${item.subTotal}
-        <button onclick="addToCart(${item.id}, -1)">-</button>
-        <button onclick="addToCart(${item.id}, 1)">+</button>
-        <button onclick="removeFromCart(${item.id})">Eliminar</button></p>
-    `;
-
-
-
+        const cartItemDiv = document.createElement('table');
+        cartItemDiv.id = 'idTabla';
         cartItemDiv.style.backgroundColor = '#150320';
         cartItemDiv.style.padding = '1rem';
+        cartItemDiv.style.width = '100%'; // Ancho de la tabla al 100%
+
+        // Crear una fila (tr) para cada elemento del carrito
+        const row = document.createElement('tr');
+
+        // Celda para el nombre del artículo (alineado a la izquierda)
+        const nameCell = document.createElement('td');
+        nameCell.textContent = item.nombre + ': ';
+        nameCell.style.width = '30%'; // Ancho fijo para el nombre del artículo
+        row.appendChild(nameCell);
+
+        // Celda para el precio (centrado)
+        const priceCell = document.createElement('td');
+        priceCell.textContent = '$' + item.precio;
+        priceCell.style.textAlign = 'center'; // Estilo centrado
+        priceCell.style.width = '20%'; // Ancho fijo para el precio
+        row.appendChild(priceCell);
+
+        // Celda para la cantidad (centrado)
+        const quantityCell = document.createElement('td');
+        quantityCell.textContent = item.cantidad;
+        quantityCell.style.textAlign = 'center'; // Estilo centrado
+        quantityCell.style.width = '10%'; // Ancho fijo para la cantidad
+        row.appendChild(quantityCell);
+
+        // Celda para el subtotal (centrado)
+        const subtotalCell = document.createElement('td');
+        subtotalCell.textContent = '$' + item.subTotal;
+        subtotalCell.style.textAlign = 'center'; // Estilo centrado
+        subtotalCell.style.width = '20%'; // Ancho fijo para el subtotal
+        row.appendChild(subtotalCell);
+
+        // Celda para los botones (centrado)
+        const buttonCell = document.createElement('td');
+        buttonCell.style.textAlign = 'center'; // Estilo centrado
+        buttonCell.style.width = '20%'; // Ancho fijo para los botones
+
+        // Botón para disminuir cantidad
+        const decreaseButton = document.createElement('button');
+        decreaseButton.textContent = '-';
+        decreaseButton.onclick = () => addToCart(item.id, -1);
+        decreaseButton.style.margin = '0.5rem';
+        decreaseButton.style.background = colorAmarillo;
+        decreaseButton.style.color = '#150320';
+        buttonCell.appendChild(decreaseButton);
+
+        // Botón para aumentar cantidad
+        const increaseButton = document.createElement('button');
+        increaseButton.textContent = '+';
+        increaseButton.onclick = () => addToCart(item.id, 1);
+        increaseButton.style.margin = '0.5rem';
+        increaseButton.style.background = colorAmarillo;
+        increaseButton.style.color = '#150320';
+        buttonCell.appendChild(increaseButton);
+
+        // Botón para eliminar artículo
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Eliminar';
+        removeButton.onclick = () => removeFromCart(item.id);
+        removeButton.style.margin = '0.5rem';
+        removeButton.style.background = 'red';
+        removeButton.style.color = 'white';
+        buttonCell.appendChild(removeButton);
+
+        row.appendChild(buttonCell);
+
+        // Agregar la fila a la tabla
+        cartItemDiv.appendChild(row);
+
+        // Agregar la tabla al contenedor del carrito (cartDiv)
         cartDiv.appendChild(cartItemDiv);
     });
+
+
+    //////////////////////////////////////////////////////////// prueba de tabla
+    //////////////////////////////////////////////////////////// prueba de tabla
+    //////////////////////////////////////////////////////////// prueba de tabla
+    //////////////////////////////////////////////////////////// prueba de tabla
+
+
 
     const totalDiv = document.createElement('div');
     const vaciarCarro = document.createElement('button');
