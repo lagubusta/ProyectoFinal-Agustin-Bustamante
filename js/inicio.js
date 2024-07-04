@@ -2,18 +2,24 @@
 
 
 // Titular
-const divContenedor1 = document.createElement('div');
-cuerpo.appendChild(divContenedor1);
-divContenedor1.style.backgroundColor = 'black';
-divContenedor1.style.height = '20rem';
-const titular = document.createElement('h1');
-divContenedor1.appendChild(titular);
-titular.textContent = 'Tienda oficial de Pink Floyd';
-titular.style.marginLeft = '3rem';
-titular.style.paddingTop = '4rem';
-titular.style.fontFamily = 'buda';
-titular.style.color = colorAmarillo;
-titular.style.fontSize = '6rem';
+const gallery = document.createElement('section');
+gallery.style.backgroundColor = 'black';
+gallery.style.height = '20rem';
+cuerpo.appendChild(gallery);
+
+const foto = document.createElement('img');
+foto.className = 'fondoInde';
+foto.src = `img/banda1.jpg`;
+
+gallery.appendChild(foto);
+
+
+
+
+
+
+
+
 //div articulos
 const divArticulos = document.createElement('div');
 cuerpo.appendChild(divArticulos);
