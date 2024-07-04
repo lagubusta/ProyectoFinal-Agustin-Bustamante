@@ -30,10 +30,23 @@ for( link of links) {
 // colores definidos.
 const colorAmarillo = '#d6a505';
 
+// boton ir carrito
+const botonIrCarrito = document.createElement('button');
+botonIrCarrito.id = 'idBotonIrCarrito';
+botonIrCarrito.style.alignContent = 'right';
+botonIrCarrito.textContent = 'Carrito';
+// const  = document.querySelector('button');
+ulNav.appendChild(botonIrCarrito);
 
+botonIrCarrito.addEventListener('click', irCarrito);
+
+function irCarrito() {
+    window.location.href = './productos.html#idTabla';
+}
 
 /////////////////////////////////////////////////////////////////////////
 // footer
 
 const footer = document.createElement('footer');
 cuerpo.appendChild(footer);
+
