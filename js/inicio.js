@@ -3,19 +3,24 @@
 
 // Titular
 const gallery = document.createElement('section');
-gallery.style.backgroundColor = 'black';
+gallery.class = 'gallery';
+// gallery.style.backgroundColor = 'black';
 gallery.style.height = '20rem';
+gallery.style.position = 'relative';
 cuerpo.appendChild(gallery);
 
 const foto = document.createElement('img');
-foto.className = 'fondoInde';
-foto.src = `img/banda1.jpg`;
-
+foto.className = 'fotoIndex';
 gallery.appendChild(foto);
 
-
-
-
+let counter = 1;
+const intervalo = setInterval(() => {
+    counter++;
+    if (counter > 2) {
+        counter = 1;
+    }
+    foto.src = `img/banda${counter}.jpg`;
+}, 1500);
 
 
 
