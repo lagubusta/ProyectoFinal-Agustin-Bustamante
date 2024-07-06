@@ -5,8 +5,7 @@
 const gallery = document.createElement('section');
 gallery.class = 'gallery';
 // gallery.style.backgroundColor = 'black';
-gallery.style.height = '20rem';
-gallery.style.position = 'relative';
+// gallery.style.position = 'relative';
 cuerpo.appendChild(gallery);
 
 const foto = document.createElement('img');
@@ -16,7 +15,7 @@ gallery.appendChild(foto);
 let counter = 1;
 const intervalo = setInterval(() => {
     counter++;
-    if (counter > 2) {
+    if (counter > 4) {
         counter = 1;
     }
     foto.src = `img/banda${counter}.jpg`;
