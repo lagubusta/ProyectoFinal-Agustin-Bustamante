@@ -220,7 +220,6 @@ function renderCart() {
     totalDiv.style.padding = '1.3rem';
     totalDiv.style.fontFamily = 'buda';
     totalDiv.style.textAlign = 'center';
-
     totalDiv.appendChild(vaciarCarro);
     vaciarCarro.textContent = 'Vaciar';
     vaciarCarro.style.margin = '1.5rem';
