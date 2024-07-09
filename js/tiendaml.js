@@ -1,16 +1,16 @@
-const container = document.createElement('main');
-container.className = 'container';
-container.textContent = 'hola';
+const containerMain = document.createElement('main');
+containerMain.className = 'container';
+containerMain.textContent = 'hola';
 cuerpo.appendChild(container);
 
-const cards = document.createElement('div');
-cards.id = 'cards';
-cards.className = 'tarjetas';
-container.appendChild(cards);
+const cardss = document.createElement('div');
+cardss.id = 'cards';
+cardss.className = 'tarjetas';
+containerMain.appendChild(cardss);
 
-const listado = document.createElement('ul');
-listado.id = 'listado';
-container.appendChild(listado);
+const listadoo = document.createElement('ul');
+listadoo.id = 'listado';
+containerMain.appendChild(listadoo);
 
 
 
