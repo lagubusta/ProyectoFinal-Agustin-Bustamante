@@ -16,9 +16,6 @@ const intervalo = setInterval(() => {
     foto.src = `img/banda${counter}.jpg`;
 }, 1500);
 
-
-
-
 //div articulos
 const divArticulos = document.createElement('div');
 cuerpo.appendChild(divArticulos);

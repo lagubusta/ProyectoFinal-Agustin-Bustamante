@@ -22,7 +22,7 @@ async function getArtistId(artistName) {
 }
 
 // Obtener los álbumes del artista
-async function getAlbumsByArtist(artistId) {
+async function getAlbumsArtist(artistId) {
   const response = await fetchWebApi(`v1/artists/${artistId}/albums?include_groups=album&limit=50`, 'GET');
   return response.items;
 }
@@ -31,7 +31,7 @@ async function getAlbumsByArtist(artistId) {
 async function displayAlbums() {
   try {
     const artistId = await getArtistId('Pink Floyd');
-    const albums = await getAlbumsByArtist(artistId);
+    const albums = await getAlbumsArtist(artistId);
 
     const container = document.createElement('div');
     container.id = 'albums-container';
@@ -55,10 +55,10 @@ async function displayAlbums() {
       container.appendChild(cardAlbum);
     });
   } catch (error) {
-    console.error('Error fetching albums:', error);
+    console.error('Error albums:', error);
     const container = document.createElement('div');
     container.id = 'albums-container';
-    container.innerText = 'Failed to load albums.';
+    container.innerText = 'Error al cargar albums.';
     document.body.appendChild(container);
   }
 }
