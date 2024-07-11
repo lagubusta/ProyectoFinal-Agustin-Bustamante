@@ -1,11 +1,6 @@
-
-
-
 // Titular
-const gallery = document.createElement('section');
-gallery.class = 'gallery';
-// gallery.style.backgroundColor = 'black';
-// gallery.style.position = 'relative';
+const gallery = document.createElement('div');
+gallery.className = 'gallery';
 cuerpo.appendChild(gallery);
 
 const foto = document.createElement('img');
@@ -28,7 +23,7 @@ const intervalo = setInterval(() => {
 const divArticulos = document.createElement('div');
 cuerpo.appendChild(divArticulos);
 divArticulos.style.display = 'flex';
-////////////////////////////////////////////////////////////////////
+
 // articulo 1
 const articulo1 = document.createElement('article');
 divArticulos.appendChild(articulo1);
@@ -48,6 +43,7 @@ parraA1.textContent = 'Somos tienda oficial de venta de productos de Pink Floyd.
 parraA1.style.display = 'none';
 parraA1.style.fontFamily = 'buda';
 parraA1.style.color = colorAmarillo;
+
 articulo1.appendChild(parraA1);
 articulo1.addEventListener('mouseover', () => {
     articulo1.style.color = colorAmarillo;
@@ -61,6 +57,7 @@ articulo1.addEventListener('mouseover', () => {
     parraA1.style.padding = '1rem';
     articulo1.style.transition = 'background-color 0.3s, color 0.3s';
 });
+
 articulo1.addEventListener('mouseout', () => {
     articulo1.style.color = 'Black';
     articulo1.style.backgroundColor = colorAmarillo;
@@ -69,7 +66,7 @@ articulo1.addEventListener('mouseout', () => {
     articulo1.style.fontFamily = 'buda';
     parraA1.style.display = 'none';
 });
-////////////////////////////////////////////////////////////////////
+
 // articulo 2
 const articulo2 = document.createElement('article');
 divArticulos.appendChild(articulo2);
@@ -106,6 +103,7 @@ articulo2.addEventListener('mouseover', () => {
     parraA2.style.padding = '1rem';
     articulo2.style.transition = 'background-color 0.3s, color 0.3s';
 });
+
 articulo2.addEventListener('mouseout', () => {
     articulo2.style.color = 'Black';
     articulo2.style.backgroundColor = colorAmarillo;

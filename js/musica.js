@@ -1,71 +1,69 @@
-// const containerSpotify = document.createElement('div');
-// containerSpotify.className = 'containerSpotify';
-// containerSpotify.textContent = 'hola';
-// containerSpotify.style.backgroundColor ='red';
-// cuerpo.appendChild(containerSpotify);
+// Token de acceso
+const token = 'BQATp2SwfIv5xofwoMK1n5q6ef3Hda66xjhJ5-HATiloczmKtv21If0xVmbZCdL5S-gaimpeO9To53xqryhEhy8S5FqIoYzZnIMBn0wOeKoSldMyQt3Y4u9hJAqz6heJkP9KzYsESD8NTf6J3UiAZETjunn08OIFnOT3Dq-Qy-KX8gSLJDq1h5cj9i1AuMbGQ_AsVbhrT7HtYL8bRxZllFuqctewURoliK9u2jmfmrdOPIWea8jR8I2johzbb1N-bDYvzg';
 
+// Definir la función fetchWebApi
+async function fetchWebApi(endpoint, method, body) {
+  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method,
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  return await res.json();
+}
+// Obtener el ID del artista
+async function getArtistId(artistName) {
+  const response = await fetchWebApi(`v1/search?q=${encodeURIComponent(artistName)}&type=artist&limit=1`, 'GET');
+  return response.artists.items[0].id;
+}
 
-// const ENDPOINT_URL = 'https://spotify23.p.rapidapi.com/search/?q=PinkFloyd&type=multi&offset=0&limit=10&numberOfTopResults=5';
-// const X_RAPIDAPI_KEY = 'b936a52aa9msh333397d6af2f23fp158bb6jsne985c870d611';
-// const X_RAPIDAPI_HOST = 'spotify23.p.rapidapi.com'
+// Obtener los álbumes del artista
+async function getAlbumsByArtist(artistId) {
+  const response = await fetchWebApi(`v1/artists/${artistId}/albums?include_groups=album&limit=50`, 'GET');
+  return response.items;
+}
 
-// async function run() {
-//   const response = await fetch(ENDPOINT_URL, {
-//     method: 'GET',
-//     headers: {
-//       'x-rapidapi-key': X_RAPIDAPI_KEY,
-//       'x-rapidapi-host': X_RAPIDAPI_HOST
-//     }
-//   })
-
-//   return await response.text()
-// }
-
-// run().then(console.log).catch(console.error)
-
-
-const containerSpotify = document.createElement('div');
-containerSpotify.className = 'containerSpotify';
-document.body.appendChild(containerSpotify);
-
-const ENDPOINT_URL = 'https://spotify23.p.rapidapi.com/artists/?q=PinkFloyd&ids=2w9zwq3AktTeYYMuhMjju8';
-const X_RAPIDAPI_KEY = 'b936a52aa9msh333397d6af2f23fp158bb6jsne985c870d611';
-const X_RAPIDAPI_HOST = 'spotify23.p.rapidapi.com'
-
-async function run() {
+// Mostrar los álbumes en la página
+async function displayAlbums() {
   try {
-    const response = await fetch(ENDPOINT_URL, {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-key': X_RAPIDAPI_KEY,
-        'x-rapidapi-host': X_RAPIDAPI_HOST
-      }
+    const artistId = await getArtistId('Pink Floyd');
+    const albums = await getAlbumsByArtist(artistId);
+
+    const container = document.createElement('div');
+    container.id = 'albums-container';
+    document.body.appendChild(container);
+
+    albums.forEach(album => {
+      const cardAlbum = document.createElement('div');
+      cardAlbum.id = 'cardAlbum';
+
+      const albumImage = document.createElement('img');
+      albumImage.className = 'imgAlbum'
+      albumImage.src = album.images[0].url;
+      albumImage.alt = album.name;
+
+      const albumName = document.createElement('h3');
+      albumName.className = 'titelAlbum';
+      albumName.innerText = album.name;
+
+      cardAlbum.appendChild(albumImage);
+      cardAlbum.appendChild(albumName);
+      container.appendChild(cardAlbum);
     });
-
-    if (!response.ok) {
-      throw new Error('Error en la solicitud a la API');
-    }
-
-    const data = await response.json();
-    displayData(data);
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error fetching albums:', error);
+    const container = document.createElement('div');
+    container.id = 'albums-container';
+    container.innerText = 'Failed to load albums.';
+    document.body.appendChild(container);
   }
 }
 
-function displayData(data) {
-  const albums = data.albums.items;
-  const ul = document.createElement('ul');
+displayAlbums();
 
-  albums.forEach(album => {
-    const li = document.createElement('li');
-    const h3 = document.createElement('h3');
-    h3.textContent = album.data.artists.items[0].profile.name;
-    li.appendChild(h3);
-    ul.appendChild(li);
-  });
 
-  containerSpotify.appendChild(ul);
-}
 
-run();

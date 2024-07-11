@@ -272,7 +272,6 @@ function recuperrarCarrito() {
 }
 
 // Mostrar el historial de compras
-
 function mostrarHistorialCompras() {
     const divHistorial = document.getElementById('historial-compras');
     const historialCompras = JSON.parse(localStorage.getItem('historialCompras')) || [];
@@ -303,8 +302,7 @@ function mostrarHistorialCompras() {
                     comprasDiv.appendChild(itemP);
                 });
 
-                divHistorial.appendChild(comprasDiv);
-                
+                divHistorial.appendChild(comprasDiv);  
             });
         }
 

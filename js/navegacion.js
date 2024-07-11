@@ -1,4 +1,3 @@
-// declaraciones generales
 // boddy
 const cuerpo = document.body;
 cuerpo.style.backgroundColor = '#23003a';
@@ -19,7 +18,7 @@ const ulNav = document.createElement ('ul');
 ulNav.id=('idUl');
 navegador.appendChild(ulNav);
 // array de links
-const links = ["Index", "Productos", "tiendaml", "Musica"];
+const links = ["Index", "Productos", "Musica"];
 for( link of links) {
     const liNav = document.createElement ('li');
     liNav.id = ('idLiNav');
@@ -43,10 +42,3 @@ botonIrCarrito.addEventListener('click', irCarrito);
 function irCarrito() {
     window.location.href = './productos.html#idTabla';
 }
-
-/////////////////////////////////////////////////////////////////////////
-// footer
-
-const footer = document.createElement('footer');
-cuerpo.appendChild(footer);
-
