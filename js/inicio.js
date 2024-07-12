@@ -36,7 +36,7 @@ articulo1.appendChild(titularArticle1);
 titularArticle1.textContent = '¿Quienes somos?';
 
 const parraA1 = document.createElement('p');
-parraA1.textContent = 'Somos tienda oficial de venta de productos de Pink Floyd. Vedemos desde buzos hasta remeras y merchandising. Somos la unica tienda autorizada.';
+parraA1.textContent = 'Somos tienda oficial de venta de productos de Pink Floyd. Vedemos desde buzos hasta remeras y merchandising. Somos la unica tienda autorizada. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem sit commodi ipsam veritatis, amet, consequatur tenetur error doloribus unde harum, eius impedit adipisci fugiat fuga. Error, voluptatibus optio. Explicabo corporis, doloremque perferendis enim nobis, neque maiores officia illo, voluptates recusandae voluptatum sed dolore repellendus fuga distinctio tenetur repudiandae voluptatem modi. Dolor voluptatibus doloremque porro, similique delectus exercitationem qui quos reiciendis omnis laborum odio culpa est tempore labore, et quis velit eveniet magnam molestias quod eum perferendis nulla a soluta? Aliquam ratione amet exercitationem ipsum illo voluptatibus corrupti. Accusamus deserunt quam, voluptatibus quis beatae commodi consectetur consequatur, culpa exercitationem distinctio ipsa.' ;
 parraA1.style.display = 'none';
 parraA1.style.fontFamily = 'buda';
 parraA1.style.color = colorAmarillo;
@@ -82,7 +82,7 @@ articulo2.appendChild(titularArticle2);
 titularArticle2.textContent = '¿Donde nos encotras?';
 
 const parraA2 = document.createElement('p');
-parraA2.textContent = 'Nos podes encontrar en 9 de Julio 900. Enfrente al obelisco. Estamos de Lunes a Viernes de 9 a 19 hs. Sábados de 9 a 16 hs.';
+parraA2.textContent = 'Nos podes encontrar en 9 de Julio 900. Enfrente al obelisco. Estamos de Lunes a Viernes de 9 a 19 hs. Sábados de 9 a 16 hs. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis sapiente maiores optio voluptas temporibus accusamus exercitationem consequatur culpa eius maxime saepe eaque dolores rerum fugiat doloremque, esse sequi pariatur, quae et officiis quod molestiae qui blanditiis voluptates! Veniam incidunt sint temporibus facere quo a quam magni mollitia quia, omnis dicta eius totam illum quod. Aut non possimus cum sit est quam error qui laborum? Aliquid quibusdam officiis dolor porro quaerat, aspernatur quas nobis quod tempora iste dicta fugiat dolorem architecto assumenda libero facilis vitae alias non labore hic ex autem? Accusamus blanditiis in, earum explicabo, veniam cumque eius quasi nam recusandae veritatis nulla quos vitae tempora quia voluptates nobis provident nisi magnam unde, labore alias ipsa impedit dolor? Ipsam totam, ex cumque expedita necessitatibus eius dolores tempora sit quaerat provident? litia quia, omnis dicta eius totam illum quod. Aut non possimus cum sit est quam error qui laborum? Aliquid quibusdam officiis dolor porro quaerat, aspernatur quas nobis quod tempora iste dicta fugiat dolorem architecto assumenda libero facilis vitae alias non labore hic ex autem? Accusamus blanditiis in, earum explicabo, veniam cumque eius quasi nam recusandae veritatis nulla quos vitae tempora quia voluptates nobis provident nisi magnam unde, labore alias ipsa impedit dolor? Ipsam totam, ex cumque expedita necessitatibus eius dolores tempora sit quaerat provident?';
 parraA2.style.display = 'none';
 parraA2.style.fontFamily = 'buda';
 parraA2.style.color = colorAmarillo;

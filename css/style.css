@@ -48,41 +48,53 @@ button {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-
-.titulo {
-    text-align: center;
-    margin-top: 2rem;
+.fechaComp{
+    font-size: 1.3rem;
+    padding-bottom: .5rem ;
+    color: rgb(237, 107, 0);
+    text-decoration: underline rgba(255, 183, 14, 0.295);
 }
 
-.div-busqueda {
+
+/* INICIO */ 
+/* GALLERY*/
+.gallery {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
     padding: 2rem;
-}
+    background: radial-gradient(circle, 
+    #d8cae150,
+    #150320
+    );
+  }
+  
+  .fotoIndex {
+    display: block;
+    width: 100%;
+    height: auto; 
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+/* GALLERY*/
+/* INICIO */
 
-.busqueda {
-    min-width: 240px;
-    margin: 1rem;
-}
-
-.tarjetas {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 4rem;
-}
-
-.card {
-    align-items: center;
-}
-
-.card img {
-    width: 16rem;
-    padding: .5rem;
-}
 
 /* MUSICA */
-#albums-container {
+/* titular */
+.h1Albums{
+    font-size: 3rem;
+    color: rgba(253, 151, 234, 0.623);
+    margin: auto;
+    padding: 3rem;
+    font-family: Lora;
+}
+/* titular */
+
+/* Contenedor albums */
+#albumsContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -93,10 +105,10 @@ button {
     margin-top: 1rem;
   }
   
-  #cardAlbum {
+  .album {
     text-align: center;
     height: 300px;
-    width: 16rem;
+    width: 14rem;
     padding: 1rem;
     background-color: #23003a;
     margin: 0.5rem;
@@ -106,39 +118,23 @@ button {
     box-sizing: border-box;
   }
   
-  .titelAlbum {
+  .albumImage {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .albumName {
     color: #b88d00;
     font-family: buda;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
-  .imgAlbum {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
+/* Contenedor albums */
 /* MUSICA */
 
-/* GALLERY*/
-.gallery {
-    width: 100%;
-    height: 350px;
-    overflow: hidden;
-  }
-  
-  .fotoIndex {
-    display: block;
-    width: 100%;
-    height: auto; 
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    margin: 0 auto;
-  }
-/* GALLERY*/
+
 

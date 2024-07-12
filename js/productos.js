@@ -124,7 +124,7 @@ function renderCart() {
         cartItemDiv.id = 'idTabla';
         cartItemDiv.style.backgroundColor = '#150320';
         cartItemDiv.style.padding = '1rem';
-        cartItemDiv.style.width = '100%'; // Ancho de la tabla al 100%
+        cartItemDiv.style.width = '100%';
 
         // Crear una fila (tr) para cada elemento del carrito
         const fila = document.createElement('tr');
@@ -139,14 +139,14 @@ function renderCart() {
         const precioCelda = document.createElement('td');
         precioCelda.textContent = '$' + item.precio;
         precioCelda.style.textAlign = 'center';
-        precioCelda.style.width = '20%'; // Ancho fijo para el precio
+        precioCelda.style.width = '20%';
         fila.appendChild(precioCelda);
 
         // Celda para la cantidad
         const cantidadCelda = document.createElement('td');
         cantidadCelda.textContent = item.cantidad;
         cantidadCelda.style.textAlign = 'center';
-        cantidadCelda.style.width = '10%'; // Ancho fijo para la cantidad
+        cantidadCelda.style.width = '10%';
         fila.appendChild(cantidadCelda);
 
         // Celda para el subtotal
@@ -274,6 +274,7 @@ function recuperrarCarrito() {
 // Mostrar el historial de compras
 function mostrarHistorialCompras() {
     const divHistorial = document.getElementById('historial-compras');
+
     const historialCompras = JSON.parse(localStorage.getItem('historialCompras')) || [];
 
     // Alternar la visibilidad del div
@@ -291,7 +292,7 @@ function mostrarHistorialCompras() {
                 comprasDiv.style.marginBottom = '1rem';
                 const dateP = document.createElement('p');
                 dateP.textContent = `Fecha: ${compra.date}`;
-                dateP.style.color = '#b88d00';
+                dateP.className = 'fechaComp';
 
                 comprasDiv.appendChild(dateP);
 
@@ -307,6 +308,8 @@ function mostrarHistorialCompras() {
         }
 
         divHistorial.style.display = 'block';
+
+        divHistorial.scrollIntoView({ behavior: 'smooth' });
         
     } else {
         divHistorial.style.display = 'none';
